@@ -5,9 +5,10 @@ services:
     container_name: bambulab-exporter
     restart: unless-stopped
     ports:
-      - 8080:8080
+      - 8080:8080  # host:container; set BAMBULAB_EXPORTER_PORT if you change the container port
     environment:
-      BAMBULAB_EXPORTER_PRINTER_HOST: "192.168.1.100" # your printer's IP address
-      BAMBULAB_EXPORTER_PRINTER_SERIAL: "1234567890" # your printer's serial number
-      BAMBULAB_EXPORTER_PRINTER_ACCESS_CODE: "1234567890" # your printer's access code
-      BAMBULAB_EXPORTER_PRINTER_NAME: "" # optional, a name for the printer to differentiate between multiple printers
+      BAMBULAB_EXPORTER_PRINTER_HOST: "192.168.1.100"     # your printer's IP address (required)
+      BAMBULAB_EXPORTER_PRINTER_SERIAL: "1234567890"      # your printer's serial number (required)
+      BAMBULAB_EXPORTER_PRINTER_ACCESS_CODE: "1234567890" # your printer's access code (required)
+      BAMBULAB_EXPORTER_PRINTER_NAME: ""                  # optional; defaults to serial number
+      # BAMBULAB_EXPORTER_PORT: "8080"                    # optional; port for /metrics (default 8080)

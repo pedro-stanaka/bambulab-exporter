@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/joho/godotenv"
 )
@@ -17,6 +18,7 @@ var (
 	PrinterSerial     = ""
 	PrinterAccessCode = ""
 	PrinterName       = ""
+	Port              = 8080
 )
 
 func loadConfig() error {
@@ -36,6 +38,14 @@ func loadConfig() error {
 	}
 	if PrinterName == "" {
 		PrinterName = PrinterSerial
+	}
+
+	if portStr := os.Getenv("BAMBULAB_EXPORTER_PORT"); portStr != "" {
+		port, err := strconv.Atoi(portStr)
+		if err != nil || port < 1 || port > 65535 {
+			return fmt.Errorf("BAMBULAB_EXPORTER_PORT must be a valid port number (1-65535), got %q", portStr)
+		}
+		Port = port
 	}
 	return nil
 }

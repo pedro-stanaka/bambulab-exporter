@@ -1,8 +1,10 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 
+	"github.com/Scrin/bambulab-exporter/config"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -11,7 +13,8 @@ func Start() <-chan error {
 
 	errChan := make(chan error)
 	go func() {
-		errChan <- http.ListenAndServe(":8080", nil)
+		addr := fmt.Sprintf(":%d", config.Port)
+		errChan <- http.ListenAndServe(addr, nil)
 	}()
 	return errChan
 }
