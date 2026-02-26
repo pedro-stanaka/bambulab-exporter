@@ -2,6 +2,7 @@ package logging
 
 import (
 	"os"
+	"strings"
 	"time"
 
 	"github.com/rs/zerolog"
@@ -15,5 +16,24 @@ func Setup() {
 	zerolog.TimestampFieldName = "timestamp"
 	zerolog.TimeFieldFormat = time.RFC3339Nano
 
-	zerolog.SetGlobalLevel(zerolog.TraceLevel)
+	level := zerolog.InfoLevel
+	if s := os.Getenv("BAMBULAB_EXPORTER_LOG_LEVEL"); s != "" {
+		switch strings.ToLower(s) {
+		case "trace":
+			level = zerolog.TraceLevel
+		case "debug":
+			level = zerolog.DebugLevel
+		case "info":
+			level = zerolog.InfoLevel
+		case "warn", "warning":
+			level = zerolog.WarnLevel
+		case "error":
+			level = zerolog.ErrorLevel
+		case "disabled", "quiet":
+			level = zerolog.Disabled
+		default:
+			level = zerolog.InfoLevel
+		}
+	}
+	zerolog.SetGlobalLevel(level)
 }

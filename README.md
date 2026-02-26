@@ -23,6 +23,7 @@ Configuration is done via environment variables (or a `.env` file when running t
 | `BAMBULAB_EXPORTER_PRINTER_ACCESS_CODE` | Yes | — | Printer access code. On P1S: WLAN menu on the printer, shown below the current IP address. |
 | `BAMBULAB_EXPORTER_PRINTER_NAME` | No | (serial number) | Friendly name for the printer. Used as a label in metrics; useful when running multiple exporters. |
 | `BAMBULAB_EXPORTER_PORT` | No | `8080` | Port the HTTP server binds to for the `/metrics` endpoint. Must be between 1 and 65535. |
+| `BAMBULAB_EXPORTER_LOG_LEVEL` | No | `info` | Log level: `trace`, `debug`, `info`, `warn`, `error`, or `disabled`. Set to `trace` or `debug` for verbose output. |
 
 ### Port
 

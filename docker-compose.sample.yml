@@ -12,3 +12,4 @@ services:
       BAMBULAB_EXPORTER_PRINTER_ACCESS_CODE: "1234567890" # your printer's access code (required)
       BAMBULAB_EXPORTER_PRINTER_NAME: ""                  # optional; defaults to serial number
       # BAMBULAB_EXPORTER_PORT: "8080"                    # optional; port for /metrics (default 8080)
+      # BAMBULAB_EXPORTER_LOG_LEVEL: "info"               # optional; trace|debug|info|warn|error|disabled (default info)
